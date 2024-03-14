@@ -1,0 +1,51 @@
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+
+    def add_task(self, task):
+        self.tasks.append({"task": task, "done": False})
+
+    def list_tasks(self):
+        if self.tasks:
+            print("Tasks:")
+            for i, task in enumerate(self.tasks, start=1):
+                status = "Done" if task["done"] else "Pending"
+                print(f"{i}. [{status}] {task['task']}")
+        else:
+            print("No tasks in the list.")
+
+    def mark_task_done(self, task_index):
+        if 1 <= task_index <= len(self.tasks):
+            self.tasks[task_index - 1]["done"] = True
+            print("Task marked as done.")
+        else:
+            print("Invalid task index.")
+
+def main():
+    todo_list = ToDoList()
+
+    while True:
+        print("\n1. Add Task")
+        print("2. List Tasks")
+        print("3. Mark Task as Done")
+        print("4. Quit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            task = input("Enter task: ")
+            todo_list.add_task(task)
+            print("Task added successfully.")
+        elif choice == "2":
+            todo_list.list_tasks()
+        elif choice == "3":
+            task_index = int(input("Enter task index to mark as done: "))
+            todo_list.mark_task_done(task_index)
+        elif choice == "4":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
